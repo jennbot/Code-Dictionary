@@ -32,11 +32,22 @@ public class Favourites {
         }
     }
 
+    /*
+     * EFFECT: produce list of all favourites
+     */
     public String favourites() {
         String all = "";
         for (String h : favourites.keySet()) {
             all += h + "\n";
         }
         return all;
+    }
+
+    /*
+     * EFFECT: produce true to if term is in favourites, otherwise produce false
+     */
+
+    public boolean inFavourites(String term) {
+        return favourites.containsKey(term);
     }
 }

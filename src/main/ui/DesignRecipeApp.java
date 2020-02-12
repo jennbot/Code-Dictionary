@@ -50,6 +50,10 @@ public class DesignRecipeApp {
             addRecipe();
         } else if (command.equals("delete")) {
             deleteRecipe();
+//        } else if (command.equals("fav")) {
+//            favouriteRecipe();
+//        } else if (command.equals("unfav")) {
+//            unfavouriteRecipe();
         } else {
             System.out.println("Unavailable, please choose again.");
         }
@@ -61,8 +65,8 @@ public class DesignRecipeApp {
         System.out.println("\ts -> search");
         System.out.println("\tadd -> add recipe");
         System.out.println("\tdelete -> delete recipe");
-        System.out.println("\tfavourite -> add to favourites");
-        System.out.println("\tunfavourite -> delete from favourites");
+//        System.out.println("\tfav -> add to favourites");
+//        System.out.println("\tunfav -> delete from favourites");
         System.out.println("\tq -> quit");
     }
 
@@ -102,9 +106,35 @@ public class DesignRecipeApp {
             System.out.print(recipe + " " + "cannot be found");
         }
     }
+
+    private void favouriteRecipe() {
+        System.out.println("Enter recipe");
+        String recipe = input.next();
+
+        if (!favourites.inFavourites(recipe) && recipelist.containsRecipeKey(recipe)) {
+            System.out.println(recipe + " " + "added to favourites!");
+            favourites.addFavourites(recipe);
+        }
+        if ((favourites.inFavourites(recipe)) && (recipelist.containsRecipeKey(recipe))) {
+            System.out.println(recipe + " " + "already added to favourites");
+        } else {
+            System.out.println(recipe + " " + "not found in recipe list");
+        }
+    }
+
+    private void unfavouriteRecipe() {
+        System.out.println("Enter recipe");
+        String recipe = input.next();
+
+        if (favourites.inFavourites(recipe)) {
+            System.out.println(recipe + " " + "deleted from favourites");
+        } else {
+            System.out.println(recipe + " " + "not found in favourites");
+        }
+    }
 }
 
-// REFERENCES
+// REFERENCES*
 // All noted references here were constructed using the help of the TellerApp (UI: TellerApp)
 // Reference 1: runTeller()
 // Reference 2: loadAccounts()

@@ -45,4 +45,20 @@ class ListOfRecipeTest {
         assertEquals(testlist.allRecipes(), "Arraylist\n");
     }
 
+    @Test
+    void testAllRecipe() {
+        assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\n");
+    }
+
+    @Test
+    void testContainsRecipeKey() {
+        assertTrue(testlist.containsRecipeKey("String"));
+        assertFalse(testlist.containsRecipeKey("mantou"));
+    }
+
+    @Test
+    void testGetRecipeDefn() {
+        assertEquals(testlist.getRecipeDefn("String"), "A variable that contains a collection of characters surrounded by double quotes");
+    }
+
 }

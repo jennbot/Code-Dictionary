@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FavouritesTest {
@@ -11,6 +11,7 @@ public class FavouritesTest {
 
     @BeforeEach
     void runBefore() {
+
         testfav = new Favourites();
     }
 
@@ -40,4 +41,11 @@ public class FavouritesTest {
         assertEquals(testfav.favourites(), "");
     }
 
+    @Test
+    void testInFavourites() {
+        testfav.addFavourites("String");
+
+        assertTrue(testfav.inFavourites("String"));
+        assertFalse(testfav.inFavourites("hello"));
+    }
 }
