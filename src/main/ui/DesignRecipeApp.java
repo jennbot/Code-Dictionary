@@ -1,13 +1,13 @@
 package ui;
 
-import model.Favourites;
+//import model.Favourites;
 import model.ListOfRecipe;
 
 import java.util.Scanner;
 
 public class DesignRecipeApp {
     private ListOfRecipe recipelist;
-    private Favourites favourites;
+//    private Favourites favourites;
     private Scanner input;
 
     // EFFECT: runs the DesignRecipe app
@@ -17,7 +17,7 @@ public class DesignRecipeApp {
 
     private void runDesignRecipe() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
         input = new Scanner(System.in);
 
         loadRecipes();
@@ -42,20 +42,26 @@ public class DesignRecipeApp {
     }
 
     private void processCommand(String command) {           // Reference 3*
-        if (command.equals("a")) {
-            System.out.println(recipelist.allRecipes());
-        } else if (command.equals("s")) {
-            doSearch();
-        } else if (command.equals("add")) {
-            addRecipe();
-        } else if (command.equals("delete")) {
-            deleteRecipe();
+        switch (command) {
+            case "a":
+                System.out.println(recipelist.allRecipes());
+                break;
+            case "s":
+                doSearch();
+                break;
+            case "add":
+                addRecipe();
+                break;
+            case "delete":
+                deleteRecipe();
 //        } else if (command.equals("fav")) {
 //            favouriteRecipe();
 //        } else if (command.equals("unfav")) {
 //            unfavouriteRecipe();
-        } else {
-            System.out.println("Unavailable, please choose again.");
+                break;
+            default:
+                System.out.println("Unavailable, please choose again.");
+                break;
         }
     }
 
@@ -107,31 +113,31 @@ public class DesignRecipeApp {
         }
     }
 
-    private void favouriteRecipe() {
-        System.out.println("Enter recipe");
-        String recipe = input.next();
+//    private void favouriteRecipe() {
+//        System.out.println("Enter recipe");
+//        String recipe = input.next();
+//
+//        if (!favourites.inFavourites(recipe) && recipelist.containsRecipeKey(recipe)) {
+//            System.out.println(recipe + " " + "added to favourites!");
+//            favourites.addFavourites(recipe);
+//        }
+//        if ((favourites.inFavourites(recipe)) && (recipelist.containsRecipeKey(recipe))) {
+//            System.out.println(recipe + " " + "already added to favourites");
+//        } else {
+//            System.out.println(recipe + " " + "not found in recipe list");
+//        }
+//    }
 
-        if (!favourites.inFavourites(recipe) && recipelist.containsRecipeKey(recipe)) {
-            System.out.println(recipe + " " + "added to favourites!");
-            favourites.addFavourites(recipe);
-        }
-        if ((favourites.inFavourites(recipe)) && (recipelist.containsRecipeKey(recipe))) {
-            System.out.println(recipe + " " + "already added to favourites");
-        } else {
-            System.out.println(recipe + " " + "not found in recipe list");
-        }
-    }
-
-    private void unfavouriteRecipe() {
-        System.out.println("Enter recipe");
-        String recipe = input.next();
-
-        if (favourites.inFavourites(recipe)) {
-            System.out.println(recipe + " " + "deleted from favourites");
-        } else {
-            System.out.println(recipe + " " + "not found in favourites");
-        }
-    }
+//    private void unfavouriteRecipe() {
+//        System.out.println("Enter recipe");
+//        String recipe = input.next();
+//
+//        if (favourites.inFavourites(recipe)) {
+//            System.out.println(recipe + " " + "deleted from favourites");
+//        } else {
+//            System.out.println(recipe + " " + "not found in favourites");
+//        }
+//    }
 }
 
 // REFERENCES*
