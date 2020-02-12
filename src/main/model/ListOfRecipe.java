@@ -22,11 +22,7 @@ public class ListOfRecipe {
      *         recipe return "_____ cannot be found".
      */
     public String searchRecipe(String term) {
-        if (recipelist.containsKey(term)) {
-            return recipelist.get(term);
-        } else {
-            return "recipe cannot be found";
-        }
+        return recipelist.getOrDefault(term, "recipe cannot be found");
     }
 
     /* REQUIRES: string is not already in recipelist
@@ -45,20 +41,18 @@ public class ListOfRecipe {
      */
 
     public void deleteRecipe(String term) {
-        if (recipelist.containsKey(term)) {
-            recipelist.remove(term);
-        }
+        recipelist.remove(term);
     }
 
     /*
      * EFFECT: produce list of all recipes in DesignRecipe
      */
     public String allRecipes() {
-        String all = "";
+        StringBuilder all = new StringBuilder();
         for (String h : recipelist.keySet()) {
-            all += h + "\n";
+            all.append(h).append("\n");
         }
-        return all;
+        return all.toString();
     }
 
     public boolean containsRecipeKey(String term) {

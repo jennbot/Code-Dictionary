@@ -26,11 +26,11 @@ class ListOfRecipeTest {
     void testAddRecipe() {
         testlist.addRecipe("hello", "world");
         assertEquals(testlist.searchRecipe("hello"), "world");
-        assertEquals(testlist.allRecipes(), "Arraylist\nString\nhello\n");
+        assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\nhello\n");
 
         testlist.addRecipe("String", "haha");
         assertEquals(testlist.searchRecipe("String"), "A variable that contains a collection of characters surrounded by double quotes");
-        assertEquals(testlist.allRecipes(), "Arraylist\nString\nhello\n");
+        assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\nhello\n");
 
     }
 
@@ -38,11 +38,11 @@ class ListOfRecipeTest {
     void testDeleteRecipe() {
         testlist.deleteRecipe("String");
         assertEquals(testlist.searchRecipe("String"), "recipe cannot be found");
-        assertEquals(testlist.allRecipes(), "Arraylist\n");
+        assertEquals(testlist.allRecipes(), "HashMap\nArraylist\n");
 
         testlist.deleteRecipe("hello");
         assertEquals(testlist.searchRecipe("hello "), "recipe cannot be found");
-        assertEquals(testlist.allRecipes(), "Arraylist\n");
+        assertEquals(testlist.allRecipes(), "HashMap\nArraylist\n");
     }
 
     @Test
