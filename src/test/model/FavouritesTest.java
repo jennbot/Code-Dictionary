@@ -38,6 +38,7 @@ public class FavouritesTest {
 
     @Test
     void testDeleteFavouriteEmpty(){
+        testfav.deleteFavourites("Hello");
         assertEquals(testfav.favourites(), "");
     }
 

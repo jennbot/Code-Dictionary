@@ -23,13 +23,10 @@ public class Favourites {
     }
 
     /*
-     * EFFECT: if definition is in the list, remove from list
-     *         if definition is not in the list, state "recipe not found"
+     * EFFECT: remove favourite from list
      */
     public void deleteFavourites(String term) {
-        if (favourites.containsKey(term)) {
-            favourites.remove(term);
-        }
+        favourites.remove(term);
     }
 
     /*
