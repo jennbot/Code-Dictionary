@@ -1,20 +1,24 @@
 package ui;
 
 //import model.Favourites;
+
 import model.ListOfRecipe;
 
 import java.util.Scanner;
 
+// DesignRecipe Application
 public class DesignRecipeApp {
     private ListOfRecipe recipelist;
-//    private Favourites favourites;
+    //    private Favourites favourites;
     private Scanner input;
 
     // EFFECT: runs the DesignRecipe app
-    public DesignRecipeApp() {
+    public DesignRecipeApp() {                                                 // Reference 1*
         runDesignRecipe();
-    } // Reference 1*
+    }
 
+    //MODIFIES: this
+    //EFFECT: runs user input
     private void runDesignRecipe() {
         boolean keepGoing = true;
         String command;
@@ -37,11 +41,14 @@ public class DesignRecipeApp {
         System.out.println("\nThank you!");
     }
 
+    // EFFECT: initializes list of recipes
     private void loadRecipes() {              // Reference 2*
         recipelist = new ListOfRecipe();
-    }
+    }           // Reference 2*
 
-    private void processCommand(String command) {           // Reference 3*
+    // MODIFIES: this
+    // EFFECT: processes user command
+    private void processCommand(String command) {                             // Reference 3*
         switch (command) {
             case "a":
                 System.out.println(recipelist.allRecipes());
@@ -65,7 +72,8 @@ public class DesignRecipeApp {
         }
     }
 
-    private void displayMenu() {                                        // Reference 4*
+    // EFFECT: displays user menu
+    private void displayMenu() {                                               // Reference 4*
         System.out.println("\nSelect from:");
         System.out.println("\ta -> all recipes");
         System.out.println("\ts -> search");
@@ -76,6 +84,7 @@ public class DesignRecipeApp {
         System.out.println("\tq -> quit");
     }
 
+    // EFFECT: conducts search in recipe list
     private void doSearch() {
         System.out.print("Enter recipe term, ex. 'String', 'ArrayList'");
         String recipe = input.next();
@@ -87,6 +96,8 @@ public class DesignRecipeApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECT: adds a recipe to list of recipe
     private void addRecipe() {
         System.out.println("Enter new recipe name");
         String term = input.next();
@@ -101,6 +112,8 @@ public class DesignRecipeApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECT: deletes recipe from list of recipe
     private void deleteRecipe() {
         System.out.print("Enter recipe");
         String recipe = input.next();
@@ -113,6 +126,18 @@ public class DesignRecipeApp {
         }
     }
 
+// REFERENCES*
+// All noted references here were constructed using the help of the TellerApp (UI: TellerApp)
+// Reference 1: runTeller()
+// Reference 2: loadAccounts()
+// Reference 3: processCommand()
+// Reference 4: displayMenu()
+
+
+// FAVOURITES - TODO uncomment out Favorites-model and Favourites-test and implement here later
+
+    // MODIFIES: this
+    // EFFECT: add recipe to favourites
 //    private void favouriteRecipe() {
 //        System.out.println("Enter recipe");
 //        String recipe = input.next();
@@ -128,6 +153,8 @@ public class DesignRecipeApp {
 //        }
 //    }
 
+    // MODIFIES: this
+    // EFFECT: deletes recipe from favourites list
 //    private void unfavouriteRecipe() {
 //        System.out.println("Enter recipe");
 //        String recipe = input.next();
@@ -140,9 +167,3 @@ public class DesignRecipeApp {
 //    }
 }
 
-// REFERENCES*
-// All noted references here were constructed using the help of the TellerApp (UI: TellerApp)
-// Reference 1: runTeller()
-// Reference 2: loadAccounts()
-// Reference 3: processCommand()
-// Reference 4: displayMenu()
