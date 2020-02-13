@@ -27,9 +27,10 @@
 - As a user, I want to delete a recipe to the DesignRecipe.
 - As a user, I want to see a list of recipes.
 
-*To do list*
+*To be completed...*
 - Add more base recipes.
 - Add and format code templates for all recipes.
+- Add favourites list.
 
 *References*
 - TellerApp, CPSC 210 2019/2020 Winter Term 2.
