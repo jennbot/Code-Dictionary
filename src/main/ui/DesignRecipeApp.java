@@ -86,7 +86,7 @@ public class DesignRecipeApp {
 
     // EFFECT: conducts search in recipe list
     private void doSearch() {
-        System.out.print("Enter recipe term, ex. 'String', 'ArrayList'");
+        System.out.print("Enter recipe term, ex. 'String', 'Arraylist'");
         String recipe = input.next();
 
         if (!recipelist.containsRecipeKey(recipe)) {
