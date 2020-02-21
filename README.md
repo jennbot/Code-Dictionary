@@ -27,6 +27,10 @@
 - As a user, I want to delete a recipe to the DesignRecipe.
 - As a user, I want to see a list of recipes.
 
+*PHASE 2: User Stories*
+- As a user, I want my save my recipe to the DesignRecipe.
+- As a user, I want to optionally load my previously saved/added entries to the DesignRecipe.
+
 *To be completed...*
 - Add more base recipes.
 - Add and format code templates for all recipes.

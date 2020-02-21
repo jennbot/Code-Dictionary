@@ -87,7 +87,7 @@ public class DesignRecipeApp {
     // EFFECT: conducts search in recipe list
     private void doSearch() {
         System.out.print("Enter recipe term, ex. 'String', 'Arraylist'");
-        String recipe = input.next();
+        String recipe = input.next() + input.nextLine();
 
         if (!recipelist.containsRecipeKey(recipe)) {
             System.out.println(recipe + " " + "cannot be found.");
@@ -100,13 +100,15 @@ public class DesignRecipeApp {
     // EFFECT: adds a recipe to list of recipe
     private void addRecipe() {
         System.out.println("Enter new recipe name");
-        String term = input.next();
+
+        String term = input.next() + input.nextLine();
 
         if (!recipelist.containsRecipeKey(term)) {
             System.out.println("Enter new recipe definition");
-            String defn = input.next();
+            String defn = input.next() + input.nextLine();
 
             recipelist.addRecipe(term, defn);
+            System.out.println(term + " " + "added!");
         } else {
             System.out.println(term + " " + "is already added!");
         }
@@ -116,7 +118,7 @@ public class DesignRecipeApp {
     // EFFECT: deletes recipe from list of recipe
     private void deleteRecipe() {
         System.out.print("Enter recipe");
-        String recipe = input.next();
+        String recipe = input.next() + input.nextLine();
 
         if (recipelist.containsRecipeKey(recipe)) {
             recipelist.deleteRecipe(recipe);
