@@ -1,5 +1,9 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 public class ListOfRecipe {
@@ -9,9 +13,26 @@ public class ListOfRecipe {
     // EFFECT: base list of definitions in design recipe
     public ListOfRecipe() {
         recipelist = new HashMap<>();
-        recipelist.put("String", "A variable that contains a collection of characters surrounded by double quotes");
-        recipelist.put("Arraylist", "A resizable array.");
-        recipelist.put("HashMap", "An array that stores items in key/value pairs");
+        loadDesignRecipeIntoHM();
+    }
+
+    // EFFECT: load recipes into the hashmap (recipelist)
+    public void loadDesignRecipeIntoHM() {                                            //Reference *1
+        String fullFilePath = "./data/termList.txt";
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fullFilePath));
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(":::");
+                if (parts.length >= 2) {
+                    String term = parts[0];
+                    String defn = parts[1];
+                    recipelist.put(term, defn);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     // REQUIRES: definition must be a non-zero length word
@@ -55,7 +76,8 @@ public class ListOfRecipe {
     public String getRecipeDefn(String term) {
         return recipelist.get(term);
     }
-
 }
 
 
+// REFERENCES
+// 1. https://stackoverflow.com/questions/29061782/java-read-txt-file-to-hashmap-split-by

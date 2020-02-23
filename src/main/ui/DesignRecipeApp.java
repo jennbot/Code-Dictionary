@@ -3,23 +3,25 @@ package ui;
 //import model.Favourites;
 
 import model.ListOfRecipe;
+import persistence.Deleter;
+import persistence.Writer;
 
+import java.io.*;
 import java.util.Scanner;
 
 // DesignRecipe Application
 public class DesignRecipeApp {
     private ListOfRecipe recipelist;
-    //    private Favourites favourites;
     private Scanner input;
 
-    // EFFECT: runs the DesignRecipe app
-    public DesignRecipeApp() {                                                 // Reference 1*
+    // EFFECT: runs the DesignRecipe app // Reference 1*
+    public DesignRecipeApp() throws FileNotFoundException {
         runDesignRecipe();
     }
 
     //MODIFIES: this
     //EFFECT: runs user input
-    private void runDesignRecipe() {
+    private void runDesignRecipe() throws FileNotFoundException {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
@@ -47,8 +49,8 @@ public class DesignRecipeApp {
     }           // Reference 2*
 
     // MODIFIES: this
-    // EFFECT: processes user command
-    private void processCommand(String command) {                             // Reference 3*
+    // EFFECT: processes user command // Reference 3*
+    private void processCommand(String command) throws FileNotFoundException {
         switch (command) {
             case "a":
                 System.out.println(recipelist.allRecipes());
@@ -108,23 +110,55 @@ public class DesignRecipeApp {
             String defn = input.next() + input.nextLine();
 
             recipelist.addRecipe(term, defn);
+            autoSaveRecipe(term, defn);
             System.out.println(term + " " + "added!");
         } else {
             System.out.println(term + " " + "is already added!");
         }
     }
 
+    // MODIFIES: termList.txt
+    // EFFECTS: save recipe to termList.txt
+    private void autoSaveRecipe(String term, String defn) {
+        try {
+            Writer writer = new Writer();
+            writer.write(term, defn);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, unable to save" + " " + term);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // MODIFIES: this
     // EFFECT: deletes recipe from list of recipe
-    private void deleteRecipe() {
+    private void deleteRecipe() throws FileNotFoundException {
         System.out.print("Enter recipe");
         String recipe = input.next() + input.nextLine();
 
         if (recipelist.containsRecipeKey(recipe)) {
             recipelist.deleteRecipe(recipe);
+           // autoDeleteRecipe(recipe);
             System.out.print(recipe + " " + "deleted");
         } else {
             System.out.print(recipe + " " + "cannot be found");
+        }
+    }
+
+    // MODIFIES: termList.txt
+    // EFFECT: auto deletes recipe from termList.txt
+    private void autoDeleteRecipe(String term) throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader("./data/termList.txt"));
+        try {
+            Deleter deleter = new Deleter();
+            deleter.delete(br, term);
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.print("Sorry, cannot delete recipe");
         }
     }
 

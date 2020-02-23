@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class ListOfRecipeTest {
 
     @Test
     void testSearchWord() {
-        assertEquals(testlist.searchRecipe("String"), "A variable that contains a collection of characters surrounded by double quotes");
+        assertEquals(testlist.searchRecipe("String"), "A variable that contains a collection of characters surrounded by double quotes ---> \"string\", \"hello\", \"world\"");
         assertEquals(testlist.searchRecipe("hello"), "recipe cannot be found");
     }
 
@@ -29,7 +30,7 @@ class ListOfRecipeTest {
         assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\nhello\n");
 
         testlist.addRecipe("String", "haha");
-        assertEquals(testlist.searchRecipe("String"), "A variable that contains a collection of characters surrounded by double quotes");
+        assertEquals(testlist.searchRecipe("String"), "A variable that contains a collection of characters surrounded by double quotes ---> \"string\", \"hello\", \"world\"");
         assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\nhello\n");
 
     }
@@ -58,7 +59,7 @@ class ListOfRecipeTest {
 
     @Test
     void testGetRecipeDefn() {
-        assertEquals(testlist.getRecipeDefn("String"), "A variable that contains a collection of characters surrounded by double quotes");
+        assertEquals(testlist.getRecipeDefn("String"), "A variable that contains a collection of characters surrounded by double quotes ---> \"string\", \"hello\", \"world\"");
     }
 
 }
