@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +26,7 @@ public class WriterTest {
 //    }
 
     @Test
-    void testWrite() {
+    void testWrite() throws FileNotFoundException {
         // save recipe to testList file
         testWriter.write("hello");
         testWriter.write(":::");
@@ -33,28 +34,12 @@ public class WriterTest {
         testWriter.write("\n");
         testWriter.close();
 
-        // create new hashmap and load it with testList.txt
-        HashMap testlist = new HashMap<String, String>();
-        String fullFilePath = "./data/testList";
-        String line;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fullFilePath));
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(":::");
-                if (parts.length >= 2) {
-                    String term = parts[0];
-                    String defn = parts[1];
-                    testlist.put(term, defn);
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         // verify "hello" has been added to testList.txt
-        assertTrue(testlist.containsKey("scooby scooby doo"));
-        assertEquals(testlist.get("scooby scooby doo"),"where are you");
-        assertTrue(testlist.containsKey("hello"));
-        assertEquals(testlist.get("hello"),"world");
+        Scanner check = new Scanner(new File( "./data/testList"));
+        while (check.hasNext()) {
+            String line = check.nextLine();
+            assertEquals(line, "hello"+":::"+"world");
+        }
     }
 }
 

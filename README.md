@@ -29,7 +29,7 @@
 
 *PHASE 2: User Stories*
 - As a user, I when I add a recipe, I want that recipe to be auto-saved. 
-- As a user, I want to choose to be able to restore my recipe back to the default list.
+- As a user, I want I want to be able to restore DesignRecipe back to it's default state (load default file).
 
 *To be completed...*
 - Add more base recipes.
