@@ -17,7 +17,7 @@ public class Writer {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes definition to text file                                        Reference *1
+    // EFFECTS: appends definition to text file                                        Reference *1
     public void write(String term, String defn) {
         printWriter.print(term);
         printWriter.print(":::");

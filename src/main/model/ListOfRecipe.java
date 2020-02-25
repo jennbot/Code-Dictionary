@@ -3,7 +3,6 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 public class ListOfRecipe {
@@ -13,7 +12,6 @@ public class ListOfRecipe {
     // EFFECT: base list of definitions in design recipe
     public ListOfRecipe() {
         recipelist = new HashMap<>();
-        loadDesignRecipeIntoHM();
     }
 
     // EFFECT: load recipes into the hashmap (recipelist)
@@ -58,6 +56,7 @@ public class ListOfRecipe {
         recipelist.remove(term);
     }
 
+
     //EFFECT: produce list of all recipes in DesignRecipe
     public String allRecipes() {
         StringBuilder all = new StringBuilder();
@@ -76,6 +75,7 @@ public class ListOfRecipe {
     public String getRecipeDefn(String term) {
         return recipelist.get(term);
     }
+
 }
 
 

@@ -3,7 +3,7 @@ package ui;
 //import model.Favourites;
 
 import model.ListOfRecipe;
-import persistence.Deleter;
+import persistence.OverWriter;
 import persistence.Writer;
 
 import java.io.*;
@@ -15,13 +15,13 @@ public class DesignRecipeApp {
     private Scanner input;
 
     // EFFECT: runs the DesignRecipe app // Reference 1*
-    public DesignRecipeApp() throws FileNotFoundException {
+    public DesignRecipeApp() {
         runDesignRecipe();
     }
 
     //MODIFIES: this
     //EFFECT: runs user input
-    private void runDesignRecipe() throws FileNotFoundException {
+    private void runDesignRecipe() {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
@@ -46,11 +46,12 @@ public class DesignRecipeApp {
     // EFFECT: initializes list of recipes
     private void loadRecipes() {              // Reference 2*
         recipelist = new ListOfRecipe();
+        recipelist.loadDesignRecipeIntoHM();
     }           // Reference 2*
 
     // MODIFIES: this
     // EFFECT: processes user command // Reference 3*
-    private void processCommand(String command) throws FileNotFoundException {
+    private void processCommand(String command) {
         switch (command) {
             case "a":
                 System.out.println(recipelist.allRecipes());
@@ -63,10 +64,9 @@ public class DesignRecipeApp {
                 break;
             case "delete":
                 deleteRecipe();
-//        } else if (command.equals("fav")) {
-//            favouriteRecipe();
-//        } else if (command.equals("unfav")) {
-//            unfavouriteRecipe();
+                break;
+            case "reset":
+                resetRecipeDefault();
                 break;
             default:
                 System.out.println("Unavailable, please choose again.");
@@ -81,6 +81,7 @@ public class DesignRecipeApp {
         System.out.println("\ts -> search");
         System.out.println("\tadd -> add recipe");
         System.out.println("\tdelete -> delete recipe");
+        System.out.println("\treset -> restore DesignRecipe to default recipes list");
 //        System.out.println("\tfav -> add to favourites");
 //        System.out.println("\tunfav -> delete from favourites");
         System.out.println("\tq -> quit");
@@ -126,8 +127,6 @@ public class DesignRecipeApp {
             writer.close();
         } catch (FileNotFoundException e) {
             System.out.println("Sorry, unable to save" + " " + term);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,33 +134,43 @@ public class DesignRecipeApp {
 
     // MODIFIES: this
     // EFFECT: deletes recipe from list of recipe
-    private void deleteRecipe() throws FileNotFoundException {
+    private void deleteRecipe() {
         System.out.print("Enter recipe");
         String recipe = input.next() + input.nextLine();
 
         if (recipelist.containsRecipeKey(recipe)) {
             recipelist.deleteRecipe(recipe);
-           // autoDeleteRecipe(recipe);
             System.out.print(recipe + " " + "deleted");
         } else {
             System.out.print(recipe + " " + "cannot be found");
         }
     }
 
-    // MODIFIES: termList.txt
-    // EFFECT: auto deletes recipe from termList.txt
-    private void autoDeleteRecipe(String term) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader("./data/termList.txt"));
+//    // MODIFIES: termList.txt
+//    // EFFECT: auto deletes recipe from termList.txt
+//    private void autoDeleteRecipe(String term) throws FileNotFoundException {
+//        BufferedReader br = new BufferedReader(new FileReader("./data/termList.txt"));
+//        try {
+//            Deleter deleter = new Deleter();
+//            deleter.delete(br, term);
+//            br.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.print("Sorry, cannot delete recipe");
+//        }
+//    }
+
+    public void resetRecipeDefault() {
         try {
-            Deleter deleter = new Deleter();
-            deleter.delete(br, term);
-            br.close();
+            OverWriter overwriter = new OverWriter();
+            overwriter.overWrite();
+            overwriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.print("Sorry, cannot delete recipe");
         }
+        loadRecipes();
+        System.out.println("Default recipes restored!");
     }
-
 // REFERENCES*
 // All noted references here were constructed using the help of the TellerApp (UI: TellerApp)
 // Reference 1: runTeller()
@@ -169,37 +178,5 @@ public class DesignRecipeApp {
 // Reference 3: processCommand()
 // Reference 4: displayMenu()
 
-
-// FAVOURITES - TODO uncomment out Favorites-model and Favourites-test and implement here later
-
-    // MODIFIES: this
-    // EFFECT: add recipe to favourites
-//    private void favouriteRecipe() {
-//        System.out.println("Enter recipe");
-//        String recipe = input.next();
-//
-//        if (!favourites.inFavourites(recipe) && recipelist.containsRecipeKey(recipe)) {
-//            System.out.println(recipe + " " + "added to favourites!");
-//            favourites.addFavourites(recipe);
-//        }
-//        if ((favourites.inFavourites(recipe)) && (recipelist.containsRecipeKey(recipe))) {
-//            System.out.println(recipe + " " + "already added to favourites");
-//        } else {
-//            System.out.println(recipe + " " + "not found in recipe list");
-//        }
-//    }
-
-    // MODIFIES: this
-    // EFFECT: deletes recipe from favourites list
-//    private void unfavouriteRecipe() {
-//        System.out.println("Enter recipe");
-//        String recipe = input.next();
-//
-//        if (favourites.inFavourites(recipe)) {
-//            System.out.println(recipe + " " + "deleted from favourites");
-//        } else {
-//            System.out.println(recipe + " " + "not found in favourites");
-//        }
-//    }
 }
 

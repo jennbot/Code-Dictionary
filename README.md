@@ -28,8 +28,8 @@
 - As a user, I want to see a list of recipes.
 
 *PHASE 2: User Stories*
-- As a user, I want my save my recipe to the DesignRecipe.
-- As a user, I want to optionally load my previously saved/added entries to the DesignRecipe.
+- As a user, I when I add a recipe, I want that recipe to be auto-saved. 
+- As a user, I want to choose to be able to restore my recipe back to the default list.
 
 *To be completed...*
 - Add more base recipes.
