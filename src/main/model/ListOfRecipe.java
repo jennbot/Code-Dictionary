@@ -1,5 +1,7 @@
 package model;
 
+import persistence.OverWriter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -74,6 +76,17 @@ public class ListOfRecipe {
     // EFFECT: produce definition of specified recipe
     public String getRecipeDefn(String term) {
         return recipelist.get(term);
+    }
+
+    // EFFECT: restore DesignRecipe's list of recipes to default list
+    public void reset() {
+        try {
+            OverWriter overwriter = new OverWriter();
+            overwriter.overWrite();
+            overwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

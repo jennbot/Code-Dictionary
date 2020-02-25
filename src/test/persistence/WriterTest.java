@@ -10,16 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WriterTest {
-    private static final String testfile = "./data/testList";
     private PrintWriter testWriter;
     private FileWriter testFileWriter;
-    private HashMap testlist;
 
     @BeforeEach
     void runBefore() throws IOException {
-        testFileWriter = new FileWriter(testfile, true);
+        String testlist = "./data/testList";
+        testFileWriter = new FileWriter(testlist, true);
         testWriter = new PrintWriter(testFileWriter);
     }
+
+//    @Test
+//    void testConstructor() {
+//    }
 
     @Test
     void testWrite() {

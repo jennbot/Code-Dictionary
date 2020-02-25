@@ -161,13 +161,7 @@ public class DesignRecipeApp {
 //    }
 
     public void resetRecipeDefault() {
-        try {
-            OverWriter overwriter = new OverWriter();
-            overwriter.overWrite();
-            overwriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        recipelist.reset();
         loadRecipes();
         System.out.println("Default recipes restored!");
     }
