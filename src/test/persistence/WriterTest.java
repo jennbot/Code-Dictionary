@@ -14,29 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class WriterTest {
     private PrintWriter testWriter;
     private FileWriter testFileWriter;
-    private String testlist = "./data/termList.txt";
+    private Writer testwriter;
 
     @BeforeEach
     void runBefore() throws IOException {
-        testFileWriter = new FileWriter(testlist, true);
-        testWriter = new PrintWriter(testFileWriter);
+        testwriter = new Writer();
     }
 
     @Test
     void testWrite() throws IOException {
         // save recipe to testList file
-        Writer testwriter = new Writer();
         testwriter.write("hello", "world");
+        testwriter.close();
 
         // verify "hello" has been added to testList.txt
         ListOfRecipe checklist = new ListOfRecipe();
-        assertEquals(checklist.getRecipeDefn("hello"), "world" );
+        assertEquals(checklist.getRecipeDefn("hello"), "world");
         assertTrue(checklist.containsRecipeKey("hello"));
-//        Scanner check = new Scanner(new File("./data/testList.txt"));
-//        while (check.hasNext()) {
-//            String line = check.nextLine();
-//            assertEquals(line, "hello" + ":::" + "world");
 
-        }
+        // reset termlist to default
+        OverWriter reset = new OverWriter();
+        reset.overWrite();
+    }
+
 }
 

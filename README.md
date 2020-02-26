@@ -32,6 +32,8 @@
 - As a user, I want I want to be able to restore DesignRecipe back to it's default state (load default file).
 
 *To be completed...*
+- Switch to JSON
+- Add "Recipe" class for more functionality 
 - Add more base recipes.
 - Add and format code templates for all recipes.
 - Add favourites list.
