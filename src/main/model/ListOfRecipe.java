@@ -31,7 +31,6 @@ public class ListOfRecipe {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println("Whoops! IOException, check input!");
         }
     }
 

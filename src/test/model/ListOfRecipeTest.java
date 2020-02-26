@@ -2,8 +2,10 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.OverWriter;
+import persistence.Writer;
 
-import java.io.IOException;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +21,25 @@ class ListOfRecipeTest {
     void testConstructor() {
         testlist.loadDesignRecipeIntoHM();
         assertEquals(testlist.allRecipes(), "HashMap" + "\n" + "Arraylist" + "\n" + "String"+"\n");
+    }
+
+    @Test
+    void testIOException() {
+        String fullFilePath = "./data/emptyList.txt";
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fullFilePath));
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(":::");
+                if (parts.length >= 2) {
+                    String term = parts[0];
+                    String defn = parts[1];
+                    fail();
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Test
