@@ -12,10 +12,10 @@ public class DesignRecipeApp {
     private ListOfRecipe recipelist;
     private Scanner input;
 
-    // EFFECT: runs the DesignRecipe app // Reference 1*
+    // EFFECT: runs the DesignRecipe app
     public DesignRecipeApp() {
         runDesignRecipe();
-    }
+    } // Reference 1*
 
     //MODIFIES: this
     //EFFECT: runs user input
@@ -42,10 +42,10 @@ public class DesignRecipeApp {
     }
 
     // EFFECT: initializes list of recipes
-    private void loadRecipes() {              // Reference 2*
+    private void loadRecipes() {  // Reference 2*
         recipelist = new ListOfRecipe();
         recipelist.loadDesignRecipeIntoHM();
-    }           // Reference 2*
+    }
 
     // MODIFIES: this
     // EFFECT: processes user command // Reference 3*
@@ -73,15 +73,13 @@ public class DesignRecipeApp {
     }
 
     // EFFECT: displays user menu
-    private void displayMenu() {                                               // Reference 4*
+    private void displayMenu() {  // Reference 4*
         System.out.println("\nSelect from:");
         System.out.println("\ta -> all recipes");
         System.out.println("\ts -> search");
         System.out.println("\tadd -> add recipe");
         System.out.println("\tdelete -> delete recipe");
         System.out.println("\treset -> restore DesignRecipe to default recipes list");
-//        System.out.println("\tfav -> add to favourites");
-//        System.out.println("\tunfav -> delete from favourites");
         System.out.println("\tq -> quit");
     }
 
@@ -144,6 +142,8 @@ public class DesignRecipeApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECT: loads defaultList data into termList
     public void resetRecipeDefault() {
         try {
             OverWriter overwriter = new OverWriter();
@@ -161,6 +161,5 @@ public class DesignRecipeApp {
 // Reference 2: loadAccounts()
 // Reference 3: processCommand()
 // Reference 4: displayMenu()
-
 }
 

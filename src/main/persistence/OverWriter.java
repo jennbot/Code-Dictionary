@@ -8,7 +8,7 @@ public class OverWriter {
     private PrintWriter printWriter;
     private FileWriter fileWriter;
 
-    //EFFECTS: constructs a writer that will write data to a file
+    //EFFECTS: constructs a writer that will write the default data to the termList.txt file
     public OverWriter() throws IOException {
         fileWriter = new FileWriter("./data/termList.txt");
         printWriter = new PrintWriter(fileWriter);

@@ -16,7 +16,7 @@ public class ListOfRecipe {
     }
 
     // EFFECT: load recipes into the hashmap (recipelist)
-    public void loadDesignRecipeIntoHM() {                                            //Reference *1
+    public void loadDesignRecipeIntoHM() {   //Reference *1
         String fullFilePath = "./data/termList.txt";
         String line;
         try {
@@ -31,6 +31,7 @@ public class ListOfRecipe {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
+            System.out.println("Whoops! IOException, check input!");
         }
     }
 
@@ -77,20 +78,7 @@ public class ListOfRecipe {
     public String getRecipeDefn(String term) {
         return recipelist.get(term);
     }
-//
-//    // EFFECT: restore DesignRecipe's list of recipes to default list
-//    public void reset() {
-//        try {
-//            OverWriter overwriter = new OverWriter();
-//            overwriter.overWrite();
-//            overwriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 }
-
 
 // REFERENCES
 // 1. https://stackoverflow.com/questions/29061782/java-read-txt-file-to-hashmap-split-by
