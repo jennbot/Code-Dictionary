@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class WriterTest {
     private PrintWriter testWriter;
     private FileWriter testFileWriter;
-    private String testlist = "./data/testList";
+    private String testlist = "./data/testList.txt";
 
     @BeforeEach
     void runBefore() throws IOException {

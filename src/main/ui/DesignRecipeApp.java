@@ -1,7 +1,5 @@
 package ui;
 
-//import model.Favourites;
-
 import model.ListOfRecipe;
 import persistence.OverWriter;
 import persistence.Writer;
@@ -161,7 +159,13 @@ public class DesignRecipeApp {
 //    }
 
     public void resetRecipeDefault() {
-        recipelist.reset();
+        try {
+            OverWriter overwriter = new OverWriter();
+            overwriter.overWrite();
+            overwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         loadRecipes();
         System.out.println("Default recipes restored!");
     }

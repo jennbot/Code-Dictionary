@@ -1,7 +1,5 @@
 package model;
 
-import persistence.OverWriter;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +12,7 @@ public class ListOfRecipe {
     // EFFECT: base list of definitions in design recipe
     public ListOfRecipe() {
         recipelist = new HashMap<>();
+        loadDesignRecipeIntoHM();
     }
 
     // EFFECT: load recipes into the hashmap (recipelist)
@@ -41,6 +40,7 @@ public class ListOfRecipe {
     public String searchRecipe(String term) {
         return recipelist.getOrDefault(term, "recipe cannot be found");
     }
+
 
     // REQUIRES: string is not already in recipelist
     // MODIFIES: this
@@ -77,17 +77,17 @@ public class ListOfRecipe {
     public String getRecipeDefn(String term) {
         return recipelist.get(term);
     }
-
-    // EFFECT: restore DesignRecipe's list of recipes to default list
-    public void reset() {
-        try {
-            OverWriter overwriter = new OverWriter();
-            overwriter.overWrite();
-            overwriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    // EFFECT: restore DesignRecipe's list of recipes to default list
+//    public void reset() {
+//        try {
+//            OverWriter overwriter = new OverWriter();
+//            overwriter.overWrite();
+//            overwriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }
 

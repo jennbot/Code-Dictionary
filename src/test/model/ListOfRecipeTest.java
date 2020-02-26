@@ -3,9 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListOfRecipeTest {
@@ -14,6 +11,12 @@ class ListOfRecipeTest {
     @BeforeEach
     void runBefore() {
         testlist = new ListOfRecipe();
+    }
+
+    @Test
+    void testConstructor() {
+        testlist.loadDesignRecipeIntoHM();
+        assertEquals(testlist.allRecipes(), "HashMap" + "\n" + "Arraylist" + "\n" + "String"+"\n");
     }
 
     @Test
@@ -60,5 +63,4 @@ class ListOfRecipeTest {
     void testGetRecipeDefn() {
         assertEquals(testlist.getRecipeDefn("String"), "A variable that contains a collection of characters surrounded by double quotes ---> \"string\", \"hello\", \"world\"");
     }
-
 }
