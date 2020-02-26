@@ -144,20 +144,6 @@ public class DesignRecipeApp {
         }
     }
 
-//    // MODIFIES: termList.txt
-//    // EFFECT: auto deletes recipe from termList.txt
-//    private void autoDeleteRecipe(String term) throws FileNotFoundException {
-//        BufferedReader br = new BufferedReader(new FileReader("./data/termList.txt"));
-//        try {
-//            Deleter deleter = new Deleter();
-//            deleter.delete(br, term);
-//            br.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.print("Sorry, cannot delete recipe");
-//        }
-//    }
-
     public void resetRecipeDefault() {
         try {
             OverWriter overwriter = new OverWriter();
