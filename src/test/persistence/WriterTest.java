@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class WriterTest {
     private PrintWriter testWriter;
     private FileWriter testFileWriter;
-    private String testlist = "./data/testList.txt";
+    private String testlist = "./data/termList.txt";
 
     @BeforeEach
     void runBefore() throws IOException {
@@ -23,20 +23,20 @@ public class WriterTest {
     }
 
     @Test
-    void testWrite() throws FileNotFoundException {
+    void testWrite() throws IOException {
         // save recipe to testList file
-        testWriter.write("hello");
-        testWriter.write(":::");
-        testWriter.write("world");
-        testWriter.write("\n");
-        testWriter.close();
+        Writer testwriter = new Writer();
+        testwriter.write("hello", "world");
 
         // verify "hello" has been added to testList.txt
-        Scanner check = new Scanner(new File( "./data/testList.txt"));
-        while (check.hasNext()) {
-            String line = check.nextLine();
-            assertEquals(line, "hello"+":::"+"world");
+        ListOfRecipe checklist = new ListOfRecipe();
+        assertEquals(checklist.getRecipeDefn("hello"), "world" );
+        assertTrue(checklist.containsRecipeKey("hello"));
+//        Scanner check = new Scanner(new File("./data/testList.txt"));
+//        while (check.hasNext()) {
+//            String line = check.nextLine();
+//            assertEquals(line, "hello" + ":::" + "world");
+
         }
-    }
 }
 
