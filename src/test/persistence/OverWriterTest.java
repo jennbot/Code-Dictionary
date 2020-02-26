@@ -29,6 +29,7 @@ public class OverWriterTest {
         // reload default list
         OverWriter testow = new OverWriter();
         testow.overWrite();
+        testow.close();
 
         // verify default list has loaded
         ListOfRecipe defaultlist = new ListOfRecipe();

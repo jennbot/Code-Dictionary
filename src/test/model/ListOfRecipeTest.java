@@ -2,6 +2,10 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.Writer;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +22,7 @@ class ListOfRecipeTest {
         testlist.loadDesignRecipeIntoHM();
         assertEquals(testlist.allRecipes(), "HashMap" + "\n" + "Arraylist" + "\n" + "String"+"\n");
     }
-
+    
     @Test
     void testSearchWord() {
         assertEquals(testlist.searchRecipe("String"),
