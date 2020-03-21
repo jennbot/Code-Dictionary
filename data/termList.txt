@@ -1,3 +1,4 @@
-String:::A variable that contains a collection of characters surrounded by double quotes ---> "string", "hello", "world"
-Arraylist:::A resizable array, ---> Arraylist alist = new Arraylist();
 HashMap:::An array that stores items in key/value pairs ---> HashMap map = new HashMap();
+Arraylist:::A resizable array, ---> Arraylist alist = new Arraylist();
+String:::A variable that contains a collection of characters surrounded by double quotes ---> "string", "hello", "world"
+hello:::world

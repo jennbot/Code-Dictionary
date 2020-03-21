@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.Controller">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Save Current Dictionary " />
+            <MenuItem mnemonicParsing="false" onAction="#revertDefault" text="Revert to Default" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="quitWindow" mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuAdd" text="Add Recipe" />
+            <MenuItem mnemonicParsing="false" text="Delete Recipe" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About DesignRecipe" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextArea fx:id="defnArea" layoutX="269.0" layoutY="64.0" prefHeight="286.0" prefWidth="348.0" />
+            <VBox layoutX="22.0" layoutY="64.0" prefHeight="286.0" prefWidth="228.0">
+               <children>
+                  <ListView fx:id="initialList" onMouseClicked="#clickRecipe" prefHeight="301.0" prefWidth="228.0" />
+               </children>
+            </VBox>
+            <TextField fx:id="searchBar" layoutX="21.0" layoutY="21.0" prefHeight="27.0" prefWidth="153.0" />
+            <Button fx:id="searchButton" layoutX="188.0" layoutY="21.0" mnemonicParsing="false" text="Search" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -92,4 +92,5 @@ class ListOfRecipeTest {
                 "A variable that contains a collection of characters surrounded by double quotes " +
                         "---> \"string\", \"hello\", \"world\"");
     }
+
 }

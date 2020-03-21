@@ -2,7 +2,7 @@ package ui;
 
 import model.ListOfRecipe;
 import persistence.OverWriter;
-import persistence.Writer;
+import persistence.Save;
 
 import java.io.*;
 import java.util.Scanner;
@@ -13,13 +13,13 @@ public class DesignRecipeApp {
     private Scanner input;
 
     // EFFECT: runs the DesignRecipe app
-    public DesignRecipeApp() {
-        runDesignRecipe();
+    public DesignRecipeApp() throws IOException {
+        //runDesignRecipe();
     } // Reference 1*
 
     //MODIFIES: this
     //EFFECT: runs user input
-    private void runDesignRecipe() {
+    public void runDesignRecipe() throws IOException {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
@@ -42,14 +42,14 @@ public class DesignRecipeApp {
     }
 
     // EFFECT: initializes list of recipes
-    private void loadRecipes() {  // Reference 2*
+    public void loadRecipes() {  // Reference 2*
         recipelist = new ListOfRecipe();
         recipelist.loadDesignRecipeIntoHM();
     }
 
     // MODIFIES: this
     // EFFECT: processes user command // Reference 3*
-    private void processCommand(String command) {
+    public void processCommand(String command) throws IOException {
         switch (command) {
             case "a":
                 System.out.println(recipelist.allRecipes());
@@ -66,6 +66,9 @@ public class DesignRecipeApp {
             case "reset":
                 resetRecipeDefault();
                 break;
+            case "save":
+                saveRecipe();
+                break;
             default:
                 System.out.println("Unavailable, please choose again.");
                 break;
@@ -73,18 +76,19 @@ public class DesignRecipeApp {
     }
 
     // EFFECT: displays user menu
-    private void displayMenu() {  // Reference 4*
+    public void displayMenu() {  // Reference 4*
         System.out.println("\nSelect from:");
         System.out.println("\ta -> all recipes");
         System.out.println("\ts -> search");
         System.out.println("\tadd -> add recipe");
         System.out.println("\tdelete -> delete recipe");
+        System.out.println("\tsave -> save recipe");
         System.out.println("\treset -> restore DesignRecipe to default recipes list");
         System.out.println("\tq -> quit");
     }
 
     // EFFECT: conducts search in recipe list
-    private void doSearch() {
+    public void doSearch() {
         System.out.print("Enter recipe term, ex. 'String', 'Arraylist'");
         String recipe = input.next() + input.nextLine();
 
@@ -97,7 +101,7 @@ public class DesignRecipeApp {
 
     // MODIFIES: this
     // EFFECT: adds a recipe to list of recipe
-    private void addRecipe() {
+    public void addRecipe() {
         System.out.println("Enter new recipe name");
 
         String term = input.next() + input.nextLine();
@@ -105,24 +109,40 @@ public class DesignRecipeApp {
         if (!recipelist.containsRecipeKey(term)) {
             System.out.println("Enter new recipe definition");
             String defn = input.next() + input.nextLine();
-
             recipelist.addRecipe(term, defn);
-            autoSaveRecipe(term, defn);
-            System.out.println(term + " " + "added!");
-        } else {
-            System.out.println(term + " " + "is already added!");
         }
     }
 
-    // MODIFIES: termList.txt
-    // EFFECTS: save recipe to termList.txt
-    private void autoSaveRecipe(String term, String defn) {
+    // MODIFIES: this
+    // EFFECT: adds a recipe to list of recipe
+    public void addRecipeGUI(String term, String defn) {
+        if (!recipelist.containsRecipeKey(term)) {
+            recipelist.addRecipe(term, defn);
+        }
+    }
+
+
+
+//    // MODIFIES: termList.txt
+//    // EFFECTS: save recipe to termList.txt
+//    public void autoSaveRecipe(String term, String defn) {
+//        try {
+//            Writer writer = new Writer();
+//            writer.write(term, defn);
+//            writer.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Sorry, unable to save" + " " + term);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void saveRecipe() {
         try {
-            Writer writer = new Writer();
-            writer.write(term, defn);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Sorry, unable to save" + " " + term);
+            Save saver = new Save();
+            saver.write(recipelist);
+            saver.close();
+            System.out.println("DesignRecipe Saved!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -130,7 +150,7 @@ public class DesignRecipeApp {
 
     // MODIFIES: this
     // EFFECT: deletes recipe from list of recipe
-    private void deleteRecipe() {
+    public void deleteRecipe() {
         System.out.print("Enter recipe");
         String recipe = input.next() + input.nextLine();
 
