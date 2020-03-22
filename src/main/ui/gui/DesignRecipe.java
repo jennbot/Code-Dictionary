@@ -14,10 +14,18 @@ public class DesignRecipe extends Application {
         launch(args);
     }
 
+//    @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        VBox mainVBox = FXMLLoader.load(DesignRecipe.class.getResource("fxml/DesignRecipeUI.fxml"));
+//        primaryStage.setScene(new Scene(mainVBox));
+//        primaryStage.setTitle("Design Recipe");
+//        primaryStage.show();
+//    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VBox mainVBox = FXMLLoader.load(DesignRecipe.class.getResource("fxml/DesignRecipeUI.fxml"));
-        primaryStage.setScene(new Scene(mainVBox));
+        Parent root = FXMLLoader.load(DesignRecipe.class.getResource("fxml/SplashScreen.fxml"));
+        primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Design Recipe");
         primaryStage.show();
     }

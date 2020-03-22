@@ -2,24 +2,31 @@ package ui.gui;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.control.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.DrawMode;
 import model.ListOfRecipe;
 import persistence.OverWriter;
 import persistence.Save;
 import persistence.Writer;
+import ui.Main;
 
+import javax.sound.sampled.*;
+import java.applet.Applet;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class Controller implements Initializable {
     ListOfRecipe recipelist;
@@ -55,6 +62,9 @@ public class Controller implements Initializable {
     @FXML
     private Button deleteButton;
 
+    @FXML
+    private MenuItem tobs;
+
 
     //******* ListView and TextArea ******* \\
 
@@ -76,6 +86,7 @@ public class Controller implements Initializable {
         System.out.println(recipelist.getListOfKeys());
         System.out.println(recipelist.getRecipeDefn(term));
         autoSave(term, defn);
+        play();
     }
 
     public void autoSave(String term, String defn) {
@@ -117,7 +128,7 @@ public class Controller implements Initializable {
         System.out.println("Default recipes restored!");
     }
 
-    public void revertDefault() throws IOException {
+    public void revertDefault() {
         reset();
         mainList.setItems(FXCollections.observableArrayList(recipelist.getListOfKeys()));
     }
@@ -154,14 +165,54 @@ public class Controller implements Initializable {
         Platform.exit();
     }
 
+    //******* TOBS ******* \\
+    public void playTobs() {
+        try {
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+            Clip clip;
+
+            stream = AudioSystem.getAudioInputStream(new File("./data/ferretdancetiktok.wav"));
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+            clip.start();
+        } catch (Exception e) {
+            //whatevers
+        }
+    }
+
+    public void play() {
+        try {
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+            Clip clip;
+
+            stream = AudioSystem.getAudioInputStream(new File("./data/Ring.wav"));
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+            clip.start();
+        } catch (Exception e) {
+            //whatevers
+        }
+    }
+
+
     //EFFECT: initializes the list of recipes on the listview
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //These items are for configuring the ListView
         mainList.getItems().addAll(recipelist.getListOfKeys());
         mainList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        //enter noise
+        play();
     }
-    
+
 
 }
 
@@ -169,3 +220,4 @@ public class Controller implements Initializable {
 
 // REFERENCES
 // https://www.youtube.com/watch?v=tAcHLWyO6jg - ListView/TextArea Tutorial
+// https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java - Play audio

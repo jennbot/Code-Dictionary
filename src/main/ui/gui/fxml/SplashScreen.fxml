@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="219.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.SplashScreenController">
+   <children>
+      <ImageView fx:id="imageview" fitHeight="223.0" fitWidth="391.0">
+         <image>
+            <Image url="@../../../../../data/SpashScreen.gif" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="376.0" prefWidth="579.0" />
+   </children>
+</StackPane>
