@@ -2,53 +2,82 @@ package ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ListOfRecipe;
-import ui.DesignRecipeApp;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import java.io.IOException;
-
-public class AddController {
-    ListOfRecipe recipelist = new ListOfRecipe();
+public class AddController implements Initializable {
+    Controller main;
+    String termInput;
+    String defnInput;
+    ListOfRecipe recipelist;
     Stage stage;
+
+    public AddController() {
+        recipelist = new ListOfRecipe();
+        main = new Controller();
+        System.out.println(recipelist.getListOfKeys());
+    }
+
+    public void loadRecipes() {
+        recipelist.loadDesignRecipeIntoHM();
+    }
 
     //FXML's
     @FXML
-    TextField termField;
+    private TextField termField;
     @FXML
-    TextArea defnField;
+    private TextArea defnField;
+    @FXML
+    private Button addButton;
+    @FXML
+    public Button closeButton;
 
     // Popup window for adding
     public void display() { // Reference 1
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/AddWindow.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("fxml/AddWindow.fxml"));
+            Parent root1 = fxmlLoader.load();
+
             stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root1));
-            stage.show();
+            stage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // TODO WHY WON"T THIS WORK LOL pls..... null pointer exception????
-
     public void addRecipe() {
-        String termInput = termField.getText();
-        String defnInput = defnField.getText();
-        if (recipelist.containsRecipeKey(termField.getText())) {
+        termInput = termField.getText();
+        defnInput = defnField.getText();
+        if (!recipelist.containsRecipeKey(termInput)) {
+            main.addIntoList(termInput, defnInput);
+            termField.clear();
+            defnField.setText("Recipe Added!");
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Recipe already added!");
             alert.show();
-        } else {
-            //??
         }
     }
+
+    public void handleCloseButtonAction() {
+        stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 }
+
 
 // REFERENCE
 // display():

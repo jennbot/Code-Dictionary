@@ -17,7 +17,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Save Current Dictionary " />
+            <MenuItem mnemonicParsing="false" onAction="#save" text="Save Current Dictionary " />
             <MenuItem mnemonicParsing="false" onAction="#revertDefault" text="Revert to Default" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="quitWindow" mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
@@ -26,12 +26,13 @@
         <Menu mnemonicParsing="false" text="Edit">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#menuAdd" text="Add Recipe" />
-            <MenuItem mnemonicParsing="false" text="Delete Recipe" />
+            <MenuItem mnemonicParsing="false" onAction="#menuDelete" text="Delete Recipe" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
             <MenuItem mnemonicParsing="false" text="About DesignRecipe" />
+                  <MenuItem mnemonicParsing="false" text="tobs" />
           </items>
         </Menu>
       </menus>
@@ -39,13 +40,16 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <TextArea fx:id="defnArea" layoutX="269.0" layoutY="64.0" prefHeight="286.0" prefWidth="348.0" />
-            <VBox layoutX="22.0" layoutY="64.0" prefHeight="286.0" prefWidth="228.0">
+            <VBox layoutX="22.0" layoutY="21.0" prefHeight="286.0" prefWidth="228.0">
                <children>
-                  <ListView fx:id="initialList" onMouseClicked="#clickRecipe" prefHeight="301.0" prefWidth="228.0" />
+                  <ListView fx:id="mainList" onMouseClicked="#clickRecipe" prefHeight="286.0" prefWidth="228.0" />
                </children>
             </VBox>
-            <TextField fx:id="searchBar" layoutX="21.0" layoutY="21.0" prefHeight="27.0" prefWidth="153.0" />
-            <Button fx:id="searchButton" layoutX="188.0" layoutY="21.0" mnemonicParsing="false" text="Search" />
+            <TextField fx:id="searchBar" layoutX="269.0" layoutY="21.0" prefHeight="27.0" prefWidth="272.0" />
+            <Button fx:id="searchButton" layoutX="556.0" layoutY="21.0" mnemonicParsing="false" onAction="#searchButton" text="Search" />
+            <Button fx:id="updateButton" layoutX="166.0" layoutY="314.0" mnemonicParsing="false" onAction="#updateListView" prefHeight="36.0" prefWidth="84.0" text="Refresh" />
+            <Button fx:id="deleteButton" layoutX="92.0" layoutY="314.0" mnemonicParsing="false" onAction="#menuDelete" prefHeight="36.0" prefWidth="63.0" text="Delete" />
+            <Button layoutX="22.0" layoutY="314.0" mnemonicParsing="false" onAction="#menuAdd" prefHeight="36.0" prefWidth="54.0" text="Add" />
          </children>
     </AnchorPane>
   </children>

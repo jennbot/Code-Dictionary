@@ -11,7 +11,8 @@
       <TextField fx:id="termField" layoutX="120.0" layoutY="46.0" prefHeight="27.0" prefWidth="265.0" />
       <Label layoutX="34.0" layoutY="51.0" prefHeight="17.0" prefWidth="57.0" text="Term" />
       <Label layoutX="33.0" layoutY="98.0" text="Definition" />
-      <Button layoutX="418.0" layoutY="286.0" mnemonicParsing="false" onAction="#addRecipe" text="Add" />
+      <Button fx:id="addButton" layoutX="405.0" layoutY="228.0" mnemonicParsing="false" onAction="#addRecipe" prefHeight="27.0" prefWidth="58.0" text="Add" />
       <TextArea fx:id="defnField" layoutX="120.0" layoutY="98.0" prefHeight="200.0" prefWidth="265.0" />
+      <Button fx:id="closeButton" layoutX="405.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="17.0" prefWidth="59.0" text="Close" />
    </children>
 </AnchorPane>

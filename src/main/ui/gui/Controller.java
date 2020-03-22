@@ -1,26 +1,42 @@
 package ui.gui;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.shape.DrawMode;
 import model.ListOfRecipe;
-import ui.DesignRecipeApp;
+import persistence.OverWriter;
+import persistence.Save;
+import persistence.Writer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    ListOfRecipe recipelist;
+    DrawMode drawMode;
+
+    public Controller() {
+        recipelist = new ListOfRecipe();
+    }
+
+    public void loadRecipes() {
+        recipelist = new ListOfRecipe();
+        recipelist.loadDesignRecipeIntoHM();
+    }
 
     @FXML
-    private ListView<String> initialList;
+    private ListView<String> mainList = new ListView<>();
+
     @FXML
     private TextArea defnArea;
 
@@ -33,30 +49,104 @@ public class Controller implements Initializable {
     @FXML
     private MenuItem menuAdd;
 
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private Button deleteButton;
+
+
     //******* ListView and TextArea ******* \\
 
     //EFFECT: print the corresponding definition from the chosen recipe
     public void clickRecipe() {
-        String clicked = initialList.getSelectionModel().getSelectedItem();
-        this.defnArea.setText(new ListOfRecipe().getRecipeDefn(clicked));
+        String clicked = mainList.getSelectionModel().getSelectedItem();
+        this.defnArea.setText(recipelist.getRecipeDefn(clicked));
     }
 
     //******* MenuItem "Add" ******* \\
     public void menuAdd() {
         AddController add = new AddController();
         add.display();
+        System.out.println(recipelist.getListOfKeys());
     }
 
+    public void addIntoList(String term, String defn) {
+        recipelist.addRecipe(term, defn);
+        System.out.println(recipelist.getListOfKeys());
+        System.out.println(recipelist.getRecipeDefn(term));
+        autoSave(term, defn);
+    }
+
+    public void autoSave(String term, String defn) {
+        try {
+            Writer writer = new Writer();
+            writer.write(term, defn);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, unable to save" + " " + term);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateListView() {
+        loadRecipes();
+        mainList.setItems(FXCollections.observableArrayList(recipelist.getListOfKeys()));
+        mainList.refresh();
+    }
+
+    //******* MenuItem "Delete" ******* \\
+    public void menuDelete() {
+        String selected = mainList.getSelectionModel().getSelectedItem();
+        mainList.getItems().remove(selected);
+        recipelist.deleteRecipe(selected);
+    }
+
+
     //******* MenuItem "Revert to Default" ******* \\
-    public List<String> helperDefault() throws IOException {
-        new DesignRecipeApp().resetRecipeDefault();
-        List reset = new ListOfRecipe().getListOfKeys();
-        return reset;
+    public void reset() {
+        try {
+            OverWriter overwriter = new OverWriter();
+            overwriter.overWrite();
+            overwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loadRecipes();
+        System.out.println("Default recipes restored!");
     }
 
     public void revertDefault() throws IOException {
-        initialList.getItems().clear();
-        initialList.getItems().addAll(helperDefault());
+        reset();
+        mainList.setItems(FXCollections.observableArrayList(recipelist.getListOfKeys()));
+    }
+
+    // ******* Menu "Save" ******* \\
+    public void save() {
+        try {
+            Save saver = new Save();
+            saver.write(recipelist);
+            saver.close();
+            System.out.println("DesignRecipe Saved!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved!");
+        alert.show();
+    }
+
+    // *******  SearchBar and Search Button ******* \\
+    public void searchButton() {
+        List<String> listOfOne = new ArrayList<>();
+        String input = searchBar.getText();
+        listOfOne.add(input);
+        if (recipelist.containsRecipeKey(input)) {
+            mainList.setItems(FXCollections.observableArrayList(listOfOne));
+            mainList.refresh();
+        } else {
+            searchBar.setText("Recipe not found!");
+        }
     }
 
     //******* MenuItem "Quit" ******* \\
@@ -64,20 +154,15 @@ public class Controller implements Initializable {
         Platform.exit();
     }
 
-
-
-    // *******  SearchBar and Search Button ******* \\
-
     //EFFECT: initializes the list of recipes on the listview
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //These items are for configuring the ListView
-        initialList.getItems().addAll(new ListOfRecipe().getListOfKeys());
-        initialList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        //These items are for resetting the ListView
-
+        mainList.getItems().addAll(recipelist.getListOfKeys());
+        mainList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
+    
+
 }
 
 //TODO: lol reformat definitions plssdfsalkdj make sure they space downwards so they all fit in view
