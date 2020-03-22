@@ -5,24 +5,21 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.DrawMode;
+
 import model.ListOfRecipe;
 import persistence.OverWriter;
 import persistence.Save;
 import persistence.Writer;
-import ui.Main;
+
 
 import javax.sound.sampled.*;
-import java.applet.Applet;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.net.URL;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,7 +27,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     ListOfRecipe recipelist;
-    DrawMode drawMode;
 
     public Controller() {
         recipelist = new ListOfRecipe();
@@ -86,7 +82,6 @@ public class Controller implements Initializable {
         System.out.println(recipelist.getListOfKeys());
         System.out.println(recipelist.getRecipeDefn(term));
         autoSave(term, defn);
-        play();
     }
 
     public void autoSave(String term, String defn) {
@@ -180,7 +175,7 @@ public class Controller implements Initializable {
             clip.open(stream);
             clip.start();
         } catch (Exception e) {
-            //whatevers
+            //whatever
         }
     }
 
@@ -198,7 +193,7 @@ public class Controller implements Initializable {
             clip.open(stream);
             clip.start();
         } catch (Exception e) {
-            //whatevers
+            //whatever
         }
     }
 

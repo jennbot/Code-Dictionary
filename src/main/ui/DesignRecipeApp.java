@@ -1,7 +1,7 @@
 package ui;
 
 import model.ListOfRecipe;
-import model.Recipe;
+
 import persistence.OverWriter;
 import persistence.Save;
 

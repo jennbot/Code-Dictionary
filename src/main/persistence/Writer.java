@@ -1,9 +1,6 @@
 package persistence;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
 // A writer that can write a definition to a file
 public class Writer {

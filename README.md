@@ -31,15 +31,33 @@
 - As a user, I when I add a recipe, I want that recipe to be auto-saved. 
 - As a user, I want I want to be able to restore DesignRecipe back to it's default state (load default file).
 
+*PHASE 3: Grader Instructions*
+You can generate the first required event by...
+- Clicking the add button either in the menu bar or below the ListView.
+
+You can generate the second required event by...
+- Clicking the delete button in the menu bar or below the ListView.
+- OR using the search bar
+
+You can locate my visual component by...
+- Starting the program and seeing the loading page.
+
+You can trigger my audio component by...
+- Starting the program and hearing an elevator ping.
+- Pressing the tobs button in the menu bar under "Help".
+
+You can save the state of my application by...
+- Pressing the save button in the menu bar under File.
+
+You can reload the state of my application by...
+- Pressing the revert button in the menu bar under File.
+
 *To be completed...*
 - Switch to JSON
 - Add "Recipe" class for more functionality 
 - Add more base recipes.
 - Add and format code templates for all recipes.
 - Add favourites list.
-
-*References*
-- TellerApp, CPSC 210 2019/2020 Winter Term 2.
 
   
  
