@@ -32,6 +32,8 @@
 - As a user, I want I want to be able to restore DesignRecipe back to it's default state (load default file).
 
 *PHASE 3: Grader Instructions*
+Start program at "DesignRecipe" in the UI.GUI folder
+
 You can generate the first required event by...
 - Clicking the add button either in the menu bar or below the ListView.
 
