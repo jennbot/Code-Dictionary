@@ -20,7 +20,7 @@ class ListOfRecipeTest {
     @Test
     void testConstructor() {
         testlist.loadDesignRecipeIntoHM();
-        assertEquals(testlist.allRecipes(), "HashMap" + "\n" + "Arraylist" + "\n" + "String"+"\n");
+        assertEquals(testlist.allRecipes(), "HashMap" + "\n" + "Arraylist" + "\n" + "String" + "\n");
     }
 
     @Test
@@ -92,5 +92,7 @@ class ListOfRecipeTest {
                 "A variable that contains a collection of characters surrounded by double quotes " +
                         "---> \"string\", \"hello\", \"world\"");
     }
-
+    
 }
+
+

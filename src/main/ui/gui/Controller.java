@@ -212,7 +212,9 @@ public class Controller implements Initializable {
 }
 
 //TODO: lol reformat definitions plssdfsalkdj make sure they space downwards so they all fit in view
+//TODO: test added methods in (saver, and in ListOfRecipe model)
 
 // REFERENCES
 // https://www.youtube.com/watch?v=tAcHLWyO6jg - ListView/TextArea Tutorial
 // https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java - Play audio
+
