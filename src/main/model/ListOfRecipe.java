@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ListOfRecipe {
+public class ListOfRecipe  {
     private Map<String, Recipe> recipelist;  // a list of recipes
 
 
@@ -39,7 +39,7 @@ public class ListOfRecipe {
     // EFFECT: If definition is in the design recipe, return the definition. If the definition is not in the design
     //         recipe return "_____ cannot be found".
     public String searchRecipe(String term) {
-        String search = "";
+        String search;
         if (recipelist.containsKey(term)) {
             search = recipelist.get(term).getDefinition();
         } else {
@@ -81,9 +81,7 @@ public class ListOfRecipe {
 
     public List<String> getListOfKeys() {
         Set<String> set = recipelist.keySet();
-        List<String> keysList = new LinkedList<>();
-        keysList.addAll(set);
-        return keysList;
+        return new LinkedList<>(set);
     }
 
     // EFFECT: produce definition of specified recipe
@@ -95,6 +93,7 @@ public class ListOfRecipe {
     public Set<Map.Entry<String, Recipe>> getEntrySet() {
         return recipelist.entrySet();
     }
+
 
 }
 // REFERENCES

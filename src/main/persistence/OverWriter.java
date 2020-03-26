@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.Scanner;
 
 
-public class OverWriter {
-    private PrintWriter printWriter;
-    private FileWriter fileWriter;
+//public class OverWriter {
+public class OverWriter extends Persist {
+    protected PrintWriter printWriter;
 
     //EFFECTS: constructs a writer that will write the default data to the termList.txt file
     public OverWriter() throws IOException {
-        fileWriter = new FileWriter("./data/termList.txt");
-        printWriter = new PrintWriter(fileWriter);
+        super("./data/termList.txt", false);
+        printWriter = new PrintWriter(super.fileWriter);
     }
 
     // MODIFIES: this
@@ -22,14 +22,16 @@ public class OverWriter {
             printWriter.print(inFile.nextLine());
             printWriter.print("\n");
         }
-        printWriter.close();
+        close();
         inFile.close();
     }
+
 
     // MODIFIES: this
     // EFFECTS: close print writer
     // NOTE: you MUST call this method when you are done writing writing data!!
+    @Override
     public void close() {
-        printWriter.close();
+        super.close();
     }
 }

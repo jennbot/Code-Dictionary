@@ -162,31 +162,21 @@ public class Controller implements Initializable {
 
     //******* TOBS ******* \\
     public void playTobs() {
-        try {
-            AudioInputStream stream;
-            AudioFormat format;
-            DataLine.Info info;
-            Clip clip;
-
-            stream = AudioSystem.getAudioInputStream(new File("./data/ferretdancetiktok.wav"));
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.start();
-        } catch (Exception e) {
-            //whatever
-        }
+        play("./data/ferretdancetiktok.wav");
     }
 
-    public void play() {
+    public void playBing() {
+        play("./data/Ring.wav");
+    }
+
+    private void play(String s) {
         try {
             AudioInputStream stream;
             AudioFormat format;
             DataLine.Info info;
             Clip clip;
 
-            stream = AudioSystem.getAudioInputStream(new File("./data/Ring.wav"));
+            stream = AudioSystem.getAudioInputStream(new File(s));
             format = stream.getFormat();
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
@@ -205,7 +195,7 @@ public class Controller implements Initializable {
         mainList.getItems().addAll(recipelist.getListOfKeys());
         mainList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //enter noise
-        play();
+        playBing();
     }
 
 

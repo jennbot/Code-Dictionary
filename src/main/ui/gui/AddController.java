@@ -19,25 +19,19 @@ public class AddController implements Initializable {
     ListOfRecipe recipelist;
     Stage stage;
 
-    public AddController() {
-        recipelist = new ListOfRecipe();
-        main = new Controller();
-        System.out.println(recipelist.getListOfKeys());
-    }
-
-    public void loadRecipes() {
-        recipelist.loadDesignRecipeIntoHM();
-    }
-
     //FXML's
     @FXML
     private TextField termField;
     @FXML
     private TextArea defnField;
     @FXML
-    private Button addButton;
-    @FXML
     public Button closeButton;
+
+    public AddController() {
+        recipelist = new ListOfRecipe();
+        main = new Controller();
+        System.out.println(recipelist.getListOfKeys());
+    }
 
     // Popup window for adding
     public void display() { // Reference 1

@@ -2,15 +2,13 @@ package persistence;
 
 import java.io.*;
 
-// A writer that can write a definition to a file
-public class Writer {
+public class Writer extends Persist {
     private PrintWriter printWriter;
-    private FileWriter fileWriter;
 
     //EFFECTS: constructs a writer that will write data to a file                     Reference *1
     public Writer() throws IOException {
-        fileWriter = new FileWriter("./data/termList.txt", true);
-        printWriter = new PrintWriter(fileWriter);
+        super("./data/termList.txt", true);
+        printWriter = new PrintWriter(super.fileWriter);
     }
 
     // MODIFIES: this
@@ -20,13 +18,16 @@ public class Writer {
         printWriter.print(":::");
         printWriter.print(defn);
         printWriter.print("\n");
+        close();
     }
 
     // MODIFIES: this
     // EFFECTS: close print writer
     // NOTE: you MUST call this method when you are done writing writing data!!
+    @Override
     public void close() {
-        printWriter.close();
+        super.close();
+
     }
 
 }

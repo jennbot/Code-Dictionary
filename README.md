@@ -32,7 +32,7 @@
 - As a user, I want I want to be able to restore DesignRecipe back to it's default state (load default file).
 
 *PHASE 3: Grader Instructions*
-Start program at "DesignRecipe" in the UI.GUI folder
+- Start program at "DesignRecipe" in the UI.GUI folder
 
 You can generate the first required event by...
 - Clicking the add button either in the menu bar or below the ListView.
@@ -54,12 +54,29 @@ You can save the state of my application by...
 You can reload the state of my application by...
 - Pressing the revert button in the menu bar under File.
 
+*PHASE 4: Task 2* 
+- "Make appropriate use of the Map interface somewhere in your code"
+- Implemented the Map interface in ListofRecipe class
+
+*PHASE 4: Task 3*
+- Fix 1: Fix coupling issue in ui/fxml/Controller.
+    - Prior to phase 4 there were two different methods ("playTobs" and "play") responsible for playing two different
+      soundbites.
+    - For phase 4 these two methods were refactored and consolidated into one "play" method. 
+- Fix 2: Improved coupling in Persistence package 
+    - Prior to phase 4 each persistence class was independent from one another despite sharing very similar
+      constructors and some methods.
+    - For phase 4, these classes now extend the abstract class "Persist" which consolidates constructors and the
+      method.close(). 
+    
+
 *To be completed...*
 - Switch to JSON
 - Add "Recipe" class for more functionality 
 - Add more base recipes.
 - Add and format code templates for all recipes.
 - Add favourites list.
+
 
   
  
