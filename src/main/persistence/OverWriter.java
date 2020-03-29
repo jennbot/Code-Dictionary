@@ -24,6 +24,7 @@ public class OverWriter extends Persist {
         }
         close();
         inFile.close();
+        System.out.println("Default recipes restored!");
     }
 
 

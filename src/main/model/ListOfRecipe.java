@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ListOfRecipe  {
+public class ListOfRecipe {
     private Map<String, Recipe> recipelist;  // a list of recipes
 
 

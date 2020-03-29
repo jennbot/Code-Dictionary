@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import model.ListOfRecipe;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,7 +52,7 @@ public class AddController implements Initializable {
         }
     }
 
-    public void addRecipe() {
+    public void addRecipe() throws IOException {
         termInput = termField.getText();
         defnInput = defnField.getText();
         if (!recipelist.containsRecipeKey(termInput)) {

@@ -1,9 +1,10 @@
-package ui;
+package ui.gui.console;
 
 import model.ListOfRecipe;
 
 import persistence.OverWriter;
 import persistence.Save;
+import persistence.Writer;
 
 import java.io.*;
 import java.util.Scanner;
@@ -15,8 +16,8 @@ public class DesignRecipeApp {
 
     // EFFECT: runs the DesignRecipe app
     public DesignRecipeApp() throws IOException {
-        //runDesignRecipe();
-    } // Reference 1*
+        // Reference 1*
+    }
 
     //MODIFIES: this
     //EFFECT: runs user input
@@ -102,7 +103,7 @@ public class DesignRecipeApp {
 
     // MODIFIES: this
     // EFFECT: adds a recipe to list of recipe
-    public void addRecipe() {
+    public void addRecipe() throws IOException {
         System.out.println("Enter new recipe name");
 
         String term = input.next() + input.nextLine();
@@ -114,39 +115,9 @@ public class DesignRecipeApp {
         }
     }
 
-    // MODIFIES: this
-    // EFFECT: adds a recipe to list of recipe
-    public void addRecipeGUI(String term, String defn) {
-        if (!recipelist.containsRecipeKey(term)) {
-            recipelist.addRecipe(term, defn);
-        }
-    }
-
-
-
-//    // MODIFIES: termList.txt
-//    // EFFECTS: save recipe to termList.txt
-//    public void autoSaveRecipe(String term, String defn) {
-//        try {
-//            Writer writer = new Writer();
-//            writer.write(term, defn);
-//            writer.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Sorry, unable to save" + " " + term);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-////    }
-
-    public void saveRecipe() {
-        try {
-            Save saver = new Save();
-            saver.write(recipelist);
-            saver.close();
-            System.out.println("DesignRecipe Saved!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveRecipe() throws IOException {
+        Save saver = new Save();
+        saver.write(recipelist);
     }
 
     // MODIFIES: this
@@ -165,22 +136,18 @@ public class DesignRecipeApp {
 
     // MODIFIES: this
     // EFFECT: loads defaultList data into termList
-    public void resetRecipeDefault() {
-        try {
-            OverWriter overwriter = new OverWriter();
-            overwriter.overWrite();
-            overwriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void resetRecipeDefault() throws IOException {
+        OverWriter overwriter = new OverWriter();
+        overwriter.overWrite();
+        overwriter.close();
         loadRecipes();
-        System.out.println("Default recipes restored!");
     }
+}
+
 // REFERENCES*
 // All noted references here were constructed using the help of the TellerApp (UI: TellerApp)
 // Reference 1: runTeller()
 // Reference 2: loadAccounts()
 // Reference 3: processCommand()
 // Reference 4: displayMenu()
-}
 

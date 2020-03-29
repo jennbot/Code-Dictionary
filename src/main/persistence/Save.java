@@ -25,8 +25,9 @@ public class Save extends Persist {
             printWriter.print(":::");
             printWriter.print(defn);
             printWriter.print("\n");
-            close();
         }
+        printWriter.close();
+        System.out.println("DesignRecipe Saved!");
     }
 
     // MODIFIES: this

@@ -13,13 +13,9 @@ import persistence.Writer;
 
 
 import javax.sound.sampled.*;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,22 +42,6 @@ public class Controller implements Initializable {
     @FXML
     private TextField searchBar;
 
-    @FXML
-    private Button searchButton;
-
-    @FXML
-    private MenuItem menuAdd;
-
-    @FXML
-    private Button updateButton;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private MenuItem tobs;
-
-
     //******* ListView and TextArea ******* \\
 
     //EFFECT: print the corresponding definition from the chosen recipe
@@ -71,31 +51,30 @@ public class Controller implements Initializable {
     }
 
     //******* MenuItem "Add" ******* \\
+
+    //EFFECT: menu bar "add" button action
     public void menuAdd() {
         AddController add = new AddController();
         add.display();
         System.out.println(recipelist.getListOfKeys());
     }
 
-    public void addIntoList(String term, String defn) {
+    //EFFECT: add new recipe into the ListView
+    public void addIntoList(String term, String defn) throws IOException {
         recipelist.addRecipe(term, defn);
         System.out.println(recipelist.getListOfKeys());
         System.out.println(recipelist.getRecipeDefn(term));
         autoSave(term, defn);
     }
 
-    public void autoSave(String term, String defn) {
-        try {
-            Writer writer = new Writer();
-            writer.write(term, defn);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Sorry, unable to save" + " " + term);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    //EFFECT: write new recipe into termList.txt
+    public void autoSave(String term, String defn) throws IOException {
+        Writer writer = new Writer();
+        writer.write(term, defn);
+        writer.close();
     }
 
+    //EFFECT: refresh the ListView
     public void updateListView() {
         loadRecipes();
         mainList.setItems(FXCollections.observableArrayList(recipelist.getListOfKeys()));
@@ -103,6 +82,8 @@ public class Controller implements Initializable {
     }
 
     //******* MenuItem "Delete" ******* \\
+
+    //EFFECT: menu bar "delete" button action
     public void menuDelete() {
         String selected = mainList.getSelectionModel().getSelectedItem();
         mainList.getItems().remove(selected);
@@ -111,38 +92,36 @@ public class Controller implements Initializable {
 
 
     //******* MenuItem "Revert to Default" ******* \\
-    public void reset() {
-        try {
-            OverWriter overwriter = new OverWriter();
-            overwriter.overWrite();
-            overwriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    //EFFECT: overrides termList.txt with defaultList.txt
+    public void reset() throws IOException {
+        OverWriter overwriter = new OverWriter();
+        overwriter.overWrite();
+        overwriter.close();
         loadRecipes();
-        System.out.println("Default recipes restored!");
     }
 
-    public void revertDefault() {
+    //EFFECT: menu bar "revert" button action
+    public void revertDefault() throws IOException {
         reset();
         mainList.setItems(FXCollections.observableArrayList(recipelist.getListOfKeys()));
     }
 
     // ******* Menu "Save" ******* \\
-    public void save() {
-        try {
-            Save saver = new Save();
-            saver.write(recipelist);
-            saver.close();
-            System.out.println("DesignRecipe Saved!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    //EFFECT: override termlist.txt and writes current recipelist into the text file.
+    public void save() throws IOException {
+        Save save = new Save();
+        save.write(recipelist);
+        save.close();
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved!");
         alert.show();
     }
 
     // *******  SearchBar and Search Button ******* \\
+
+    //EFFECT: "search" button action
     public void searchButton() {
         List<String> listOfOne = new ArrayList<>();
         String input = searchBar.getText();
@@ -155,20 +134,27 @@ public class Controller implements Initializable {
         }
     }
 
+
     //******* MenuItem "Quit" ******* \\
+
+    //EFFECT: menu bar "quit" button action
     public void exitProgram() {
         Platform.exit();
     }
 
-    //******* TOBS ******* \\
+    //******* Music/Soundbites ******* \\
+
+    //EFFECT: "tobs" button action
     public void playTobs() {
         play("./data/ferretdancetiktok.wav");
     }
 
+    //EFFECT: program start soundbite
     public void playBing() {
         play("./data/Ring.wav");
     }
 
+    //EFFECT: sound action event
     private void play(String s) {
         try {
             AudioInputStream stream;
@@ -201,8 +187,7 @@ public class Controller implements Initializable {
 
 }
 
-//TODO: lol reformat definitions plssdfsalkdj make sure they space downwards so they all fit in view
-//TODO: test added methods in (saver, and in ListOfRecipe model)
+
 
 // REFERENCES
 // https://www.youtube.com/watch?v=tAcHLWyO6jg - ListView/TextArea Tutorial

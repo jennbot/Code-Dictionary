@@ -1,11 +1,11 @@
 package persistence;
 
 import model.ListOfRecipe;
-import model.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SaveTest {
     private Save testwriter;
     private ListOfRecipe testrecipe;
+    private PrintWriter printWriter;
 
     @BeforeEach
     void runBefore() throws IOException {
@@ -20,6 +21,7 @@ public class SaveTest {
         testrecipe = new ListOfRecipe();
         testrecipe.addRecipe("hello", "world");
     }
+
 
     @Test
     void testWrite() throws IOException {

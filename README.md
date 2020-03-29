@@ -56,7 +56,7 @@ You can reload the state of my application by...
 
 *PHASE 4: Task 2* 
 - "Make appropriate use of the Map interface somewhere in your code"
-- Implemented the Map interface in ListofRecipe class
+- Implemented the Map interface in ListofRecipe class. 
 
 *PHASE 4: Task 3*
 - Fix 1: Fix coupling issue in ui/fxml/Controller.

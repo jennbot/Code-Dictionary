@@ -2,8 +2,6 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persistence.OverWriter;
-import persistence.Writer;
 
 import java.io.*;
 
@@ -24,7 +22,7 @@ class ListOfRecipeTest {
     }
 
     @Test
-    void testIOException() {
+    void catchIOException() {
         String fullFilePath = "./data/emptyList.txt";
         String line;
         try {
@@ -41,6 +39,27 @@ class ListOfRecipeTest {
             ex.printStackTrace();
         }
     }
+
+    @Test
+    void noCatch() {
+        String fullFilePath = "./data/termList.txt";
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fullFilePath));
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(":::");
+                if (parts.length >= 2) {
+                    String term = parts[0];
+                    String defn = parts[1];
+                    testlist.addRecipe(term, defn);
+                }
+            }
+        } catch (IOException ex) {
+            fail();
+        }
+    }
+
+
 
     @Test
     void testSearchWord() {
