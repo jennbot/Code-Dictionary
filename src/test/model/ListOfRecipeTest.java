@@ -81,6 +81,7 @@ class ListOfRecipeTest {
                         "---> \"string\", \"hello\", \"world\"");
         assertEquals(testlist.allRecipes(), "HashMap\nArraylist\nString\nhello\n");
 
+        assertFalse(testlist.addRecipe("String", "haha"));
     }
 
     @Test

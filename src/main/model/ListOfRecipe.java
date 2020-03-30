@@ -51,10 +51,15 @@ public class ListOfRecipe {
     // REQUIRES: string is not already in recipelist
     // MODIFIES: this
     // EFFECT: adds new recipe to recipelist
-    public void addRecipe(String term, String defn) {
+    public boolean addRecipe(String term, String defn) {
+        boolean added;
         if (!recipelist.containsKey(term)) {
             recipelist.put(term, new Recipe(defn));
+            added = true;
+        } else {
+            added = false;
         }
+        return added;
     }
 
     // REQUIRES: matching recipe in recipelist
