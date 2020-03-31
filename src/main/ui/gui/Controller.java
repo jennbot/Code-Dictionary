@@ -59,14 +59,6 @@ public class Controller implements Initializable {
         System.out.println(recipelist.getListOfKeys());
     }
 
-    //EFFECT: add new recipe into the ListView
-    public void addIntoList(String term, String defn) throws IOException {
-        recipelist.addRecipe(term, defn);
-        System.out.println(recipelist.getListOfKeys());
-        System.out.println(recipelist.getRecipeDefn(term));
-        autoSave(term, defn);
-    }
-
     //EFFECT: write new recipe into termList.txt
     public void autoSave(String term, String defn) throws IOException {
         Writer writer = new Writer();

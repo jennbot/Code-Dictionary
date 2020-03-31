@@ -8,7 +8,6 @@ import java.util.*;
 public class ListOfRecipe {
     private Map<String, Recipe> recipelist;  // a list of recipes
 
-
     // EFFECT: base list of definitions in design recipe
     public ListOfRecipe() {
         recipelist = new HashMap<>();

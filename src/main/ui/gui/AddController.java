@@ -55,10 +55,12 @@ public class AddController implements Initializable {
     public void addRecipe() throws IOException {
         termInput = termField.getText();
         defnInput = defnField.getText();
-        if (!recipelist.containsRecipeKey(termInput)) {
-            main.addIntoList(termInput, defnInput);
+        if (recipelist.addRecipe(termInput, defnInput)) {
+            System.out.println(recipelist.getListOfKeys());
+            System.out.println(recipelist.getRecipeDefn(termInput));
             termField.clear();
             defnField.setText("Recipe Added!");
+            main.autoSave(termInput, defnInput);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Recipe already added!");
             alert.show();
