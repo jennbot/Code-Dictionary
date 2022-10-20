@@ -1,6 +1,4 @@
-# My Personal Project
-
-## Design Recipe 
+# Design Recipe 
 
 **Project Proposal**
 
